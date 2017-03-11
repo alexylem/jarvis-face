@@ -10,10 +10,23 @@ For multi-language plugin:
 - optionally write the Description / Usage sections in several languages
 -->
 ## Description
-This plugins adds a face to Jarvis by display an animated gif in the default web browser depending on the state of Jarvis.
-Only works on Mac for the moment. Development ongoing for Linux.
+This plugins adds a face to Jarvis by display an animated gif depending on the state of Jarvis.
+You can easily create your own face by duplicating the default face in faces folder.
+
+## Requirements
+Supports OSX and Linux.
+Linux systems need to be logged in on Desktop environment.
+For those in Raspbian Lite, you can install Pixel with the following commands:
+```shell
+sudo apt-get install --no-install-recommends xserver-xorg
+sudo apt-get install --no-install-recommends xinit
+sudo apt-get install raspberrypi-ui-mods
+sudo raspi-config # boot to desktop
+sudo reboot
+```
 
 ## Screenshot
+[Demo video](https://youtu.be/gjSzJusWkHg)
 ![speaking](https://cloud.githubusercontent.com/assets/11017174/22897373/b78e8522-f223-11e6-9348-243b9189232d.gif)
 
 ## Author
