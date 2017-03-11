@@ -4,9 +4,9 @@ pg_face_init () {
 }
 
 pg_face_show () {
-    gifview --animate "$1"
+    gifview --animate "$1" &
 }
 
 pg_face_exit () {
-    killall gifview
+    killall -q gifview
 }
