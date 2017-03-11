@@ -9,13 +9,11 @@
 
 pg_face_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" # get absolute path
 
+source $pg_face_dir/functions_$platform.sh
+
 pg_face_get_random () {
     faces=( $pg_face_dir/faces/$pg_face_theme/$1/* ) # list images for given state
     echo "${faces[RANDOM%${#faces[@]}]}" # take 1 randomly
-}
-
-pg_face_show () {
-    osascript -e "tell application \"Safari\" to set URL of the front document to \"file://$1\""
 }
 
 pg_face_state () {
@@ -34,13 +32,4 @@ pg_face_state () {
             fi
         fi
     fi
-}
-
-pg_face_init () {
-    osascript -e "tell application \"Safari\" to open location \"about:blank\""
-    osascript -e "tell application \"Safari\" to activate"
-}
-
-pg_face_exit () {
-    osascript -e 'tell window 1 of application "Safari" to close current tab'
 }
