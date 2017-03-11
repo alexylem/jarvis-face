@@ -23,6 +23,7 @@ pg_face_state () {
             local face_duration="$(python "$pg_face_dir/gifduration.py" "$face")"
         fi
         pg_face_show "$face"
+        $verbose && jv_debug "previous face pid2=$pv_face_previous_pid"
         if [ -n "$2" ]; then
             sleep $face_duration
             # use http://ezgif.com/maker to set loop nb to 1

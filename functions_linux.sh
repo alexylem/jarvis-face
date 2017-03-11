@@ -7,10 +7,12 @@ pg_face_init () {
 }
 
 pg_face_show () {
-    gifview --display :0 --title "Jarvis" --animate --no-interactive "$1" & # opens new window on top
+    gifview --display :$pg_face_display_num --title "Jarvis" --animate --no-interactive "$1" & # opens new window on top
     local pid=$! # gets new window pid
+    $verbose && jv_debug "previous face pid0=$pid"
     [ "$pv_face_previous_pid" != "false" ] && kill $pv_face_previous_pid # closes previous window behind
     pv_face_previous_pid=$pid # save new window pid to close later
+    $verbose && jv_debug "previous face pid1=$pv_face_previous_pid"
 }
 
 pg_face_exit () {
