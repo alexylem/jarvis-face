@@ -1,2 +1,1 @@
 pg_face_state "listening" &
-$verbose && jv_debug "previous face pid3=$pv_face_previous_pid"
