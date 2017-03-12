@@ -26,7 +26,10 @@ sudo reboot
 ```
 
 ## Screenshot
-[Demo video](https://youtu.be/gjSzJusWkHg)
+[Demo video](https://youtu.be/bc7NcxszPZU)
+
+[![image](https://cloud.githubusercontent.com/assets/11017174/23833788/f7c11ace-074a-11e7-8baa-6d824eb9ee59.png)](https://youtu.be/bc7NcxszPZU)
+
 ![speaking](https://cloud.githubusercontent.com/assets/11017174/22897373/b78e8522-f223-11e6-9348-243b9189232d.gif)
 
 ## Author
