@@ -1,1 +1,1 @@
-pg_face_state "happy" "neutral" &
+$pg_face_anim_done && pg_face_state "happy" "neutral" &

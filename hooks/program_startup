@@ -1,2 +1,3 @@
 pg_face_init
-pg_face_state "start" "neutral"
+$pg_face_anim_start && pg_face_state "start" true
+pg_face_state "neutral" &
