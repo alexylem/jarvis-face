@@ -1,4 +1,4 @@
-pg_face_theme="fluorescent" # folder name in plugins/jarvis-face/faces/
+pg_face_theme="lagertha" # folder name in plugins/jarvis-face/faces/
 pg_face_anim_start=true # enable animation when Jarvis is started
 pg_face_anim_listening=true # enable animation when listening for command
 pg_face_anim_speaking=true # enable animation when speaking
