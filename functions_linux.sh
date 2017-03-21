@@ -12,6 +12,7 @@ pg_face_show () {
         local geometry="$pg_face_x_offset$pg_face_y_offset"
     else
         local geometry="$pg_face_size!"
+    fi
     animate -display $pg_face_display_num \
             -borderwidth 0 \
             -geometry $geometry \
