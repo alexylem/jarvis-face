@@ -26,7 +26,7 @@ pg_face_show () {
 #            --no-interactive "$1" & # opens new window on top
     if [ -n "$previous_face_pid" ]; then
         (
-            sleep 0.5 # because above (new) window takes time to open before below (previous) is closed
+            sleep 1 # because above (new) window takes time to open before below (previous) is closed
             kill $previous_face_pid 2>/dev/null # closes previous window behind
             #wait $previous_face_pid 2>/dev/null # to suppress Terminated messages
         ) & # sleep not blocking
