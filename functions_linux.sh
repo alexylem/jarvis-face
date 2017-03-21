@@ -5,12 +5,23 @@ pg_face_init () {
 }
 
 pg_face_show () {
-    local previous_face_pid="$(pgrep gifview)"
-    gifview --title "Jarvis" \
-            --display $pg_face_display_num \
-            --geometry $pg_face_size$pg_face_x_offset$pg_face_y_offset \
-            --animate \
-            --no-interactive "$1" & # opens new window on top
+    local previous_face_pid="$(pgrep animate)"
+    local backdrop=""
+    $pg_face_backdrop && backdrop="-backdrop -background black"
+    if [ $pg_face_size == "" ]; then
+        local geometry="$pg_face_x_offset$pg_face_y_offset"
+    else
+        local geometry="$pg_face_size!"
+    animate -display $pg_face_display_num \
+            -borderwidth 0 \
+            -geometry $geometry \
+            $backdrop & # opens new window on top
+#    local previous_face_pid="$(pgrep gifview)"
+#    gifview --title "Jarvis" \
+#            --display $pg_face_display_num \
+#            --geometry $pg_face_size$pg_face_x_offset$pg_face_y_offset \
+#            --animate \
+#            --no-interactive "$1" & # opens new window on top
     if [ -n "$previous_face_pid" ]; then
         (
             sleep 0.5 # because above (new) window takes time to open before below (previous) is closed
@@ -21,6 +32,6 @@ pg_face_show () {
 }
 
 pg_face_exit () {
-    killall -q gifview
+    killall -q animate
     $pg_face_hide_cursor && killall -q unclutter # show back cursor if chosen to hide it
 }
