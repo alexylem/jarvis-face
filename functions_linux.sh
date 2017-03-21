@@ -16,7 +16,8 @@ pg_face_show () {
     animate -display $pg_face_display_num \
             -borderwidth 0 \
             -geometry $geometry \
-            $backdrop & # opens new window on top
+            $backdrop \
+            "$1" & # opens new window on top
 #    local previous_face_pid="$(pgrep gifview)"
 #    gifview --title "Jarvis" \
 #            --display $pg_face_display_num \
