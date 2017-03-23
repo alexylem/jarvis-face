@@ -8,7 +8,7 @@ pg_face_show () {
     local previous_face_pid="$(pgrep animate)"
     local backdrop=""
     $pg_face_backdrop && backdrop="-backdrop -background black"
-    if [ $pg_face_size == "" ]; then
+    if [ "$pg_face_size" == "" ]; then
         local geometry="$pg_face_x_offset$pg_face_y_offset"
     else
         local geometry="$pg_face_size!"
