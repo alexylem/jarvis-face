@@ -11,7 +11,10 @@ pg_face_init () {
                  --resize $pg_face_size \
                  --no-warnings \
                  "$pg_face_dir/faces/$pg_face_theme$pg_face_size"/*/*.gif &
-        jv_spinner $!
+        jv_spinner $! || {
+            jv_error "An error has occured while resizing the face images"
+            jv_exit 1
+        }
         jv_success "Done"
     fi
     $pg_face_hide_cursor && unclutter -display $pg_face_display_num -root -idle 0.1 & # hide cursor if not used for 0.1 secs
