@@ -10,9 +10,11 @@
 pg_face_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" # get absolute path
 source $pg_face_dir/functions_$platform.sh
 
+# check face exists
 if [ ! -d "$pg_face_dir/faces/$pg_face_theme/" ]; then
     jv_error "ERROR: face theme '$pg_face_theme' not found" # trailing / to test empty dir
     jv_warning "HELP: verify pg_face_theme in jarvis-face plugin config"
+    jv_exit 1
 fi
 
 # echoes filepath picked randomly in $1 state of face theme folder, false if none
@@ -20,7 +22,7 @@ fi
 #   facefile="$(pg_face_get_random "happy")"
 pg_face_get_random () {
     shopt -s nullglob
-    local faces=( $pg_face_dir/faces/$pg_face_theme/$1/* ) # list images for given state
+    local faces=( $pg_face_dir/faces/$pg_face_theme$pg_face_size/$1/* ) # list images for given state
     local count=${#faces[@]}
     if [ $count -gt 0 ]; then
         echo "${faces[RANDOM%${#faces[@]}]}" # take 1 randomly
