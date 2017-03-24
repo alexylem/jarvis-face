@@ -10,7 +10,7 @@ pg_face_init () {
         gifsicle --batch \
                  --resize $pg_face_size \
                  --no-warnings \
-                 "$pg_face_dir/faces/$pg_face_theme$pg_face_size/*/*.gif" &
+                 "$pg_face_dir/faces/$pg_face_theme$pg_face_size"/*/*.gif &
         jv_spinner $!
         jv_success "Done"
     fi
