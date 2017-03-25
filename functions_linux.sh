@@ -6,7 +6,7 @@ pg_face_init () {
     shopt -s nullglob
     local images=( $(cd $pg_face_dir/faces/$pg_face_theme; echo */*.gif) )
     if [ ! -d "$pg_face_dir/faces/$pg_face_theme$pg_face_size" ]; then
-        c   p -R "$pg_face_dir/faces/$pg_face_theme" "$pg_face_dir/faces/$pg_face_theme$pg_face_size"
+        cp -R "$pg_face_dir/faces/$pg_face_theme" "$pg_face_dir/faces/$pg_face_theme$pg_face_size"
         to_resize=("${images[@]}")
     else
         for image in "${images[@]}"; do
