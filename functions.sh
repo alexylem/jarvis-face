@@ -31,6 +31,14 @@ pg_face_get_random () {
     fi
 }
 
+# echoes total duration of gif $1
+pg_face_gifduration () {
+    gifsicle --info --no-warnings "$1" \
+        | grep delay  \
+        | sed -ne 's#.*delay[^0-9]*\([0-9]*.[0-9]*\)s.*#\1#p' \
+        | LC_NUMERIC=en_US.UTF-8 awk '{ SUM += $1} END { print SUM }'
+}
+
 # displays a random face for 1 or 2 successive states in parameter
 # usage:
 # display neutral state without blocking jarvis
@@ -49,7 +57,7 @@ pg_face_state () {
     fi
     if [ -n "$2" ]; then
         # if $2 is true or second face to display, wait face1 animation is complete
-        [ "$face1" != false ] && sleep "$(python "$pg_face_dir/gifduration.py" "$face1")"
+        [ "$face1" != false ] && sleep "$(pg_face_gifduration "$face1")"
         # use http://ezgif.com/maker to set loop nb to 1
         if [ "$2" != true ]; then # true is just to sleep on first state
             face2="$(pg_face_get_random "$2")"
