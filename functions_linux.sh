@@ -23,8 +23,8 @@ pg_face_init () {
             }
             let i+=1
             jv_progressbar $i $nb_images
-            echo # newline
         done
+        echo # newline
     fi
     $pg_face_hide_cursor && unclutter -display $pg_face_display_num -root -idle 0.1 & # hide cursor if not used for 0.1 secs
 }
