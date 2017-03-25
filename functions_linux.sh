@@ -4,7 +4,7 @@ pg_face_init () {
     # if face directory not created yet for desired dimension
     mkdir -p  "$pg_face_dir/faces/$pg_face_theme$pg_face_size"
     # copy new/updated images that are not resized yet and count
-    local nb_updated=$(cp --archive --update --verbose plugins/jarvis-face/faces/fluorescent/* plugins/jarvis-face/faces/fluorescent800x480/ | wc -l)
+    local nb_updated=$(cp --archive --update --verbose $pg_face_dir/faces/$pg_face_theme/* $pg_face_dir/faces/$pg_face_theme$pg_face_size | wc -l)
     if [ "$nb_updated" -gt 0 ]; then
         jv_debug "Resizing $pg_face_theme/ into $pg_face_theme$pg_face_size/..."
     
@@ -13,7 +13,7 @@ pg_face_init () {
         local nb_images="${#images[@]}"
         local i=0
         jv_progressbar $i $nb_images
-        for image in "${nb_images[@]}"; do
+        for image in "${images[@]}"; do
             gifsicle --batch \
                      --resize $pg_face_size \
                      --no-warnings \
