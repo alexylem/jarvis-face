@@ -20,6 +20,8 @@ fi
 # echoes filepath picked randomly in $1 state of face theme folder, false if none
 # usage:
 #   facefile="$(pg_face_get_random "happy")"
+# used in:
+#   pg_face_state
 pg_face_get_random () {
     shopt -s nullglob
     local faces=( $pg_face_dir/faces/$pg_face_theme$pg_face_size/$1/* ) # list images for given state
@@ -32,6 +34,8 @@ pg_face_get_random () {
 }
 
 # echoes total duration of gif $1
+# used in:
+#   pg_face_state
 pg_face_gifduration () {
     gifsicle --info --no-warnings "$1" \
         | grep delay  \
@@ -41,12 +45,14 @@ pg_face_gifduration () {
 
 # displays a random face for 1 or 2 successive states in parameter
 # usage:
-# display neutral state without blocking jarvis
-#   pg_face_state "neutral" &
-# display happy animation once then neutral state
-#   pg_face_state "happy" "neutral"
-# display exit animation and force wait until end of animation
-#   pg_face_state "exit" true
+#   display neutral state without blocking jarvis
+#     pg_face_state "neutral" &
+#   display happy animation once then neutral state
+#     pg_face_state "happy" "neutral"
+#   display exit animation and force wait until end of animation
+#     pg_face_state "exit" true
+# used in:
+#   hooks
 pg_face_state () {
     face1="$(pg_face_get_random "$1")"
     if [ "$face1" == false ]; then
