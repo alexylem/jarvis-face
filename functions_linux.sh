@@ -2,26 +2,18 @@
 
 pg_face_init () {
     # if face directory not created yet for desired dimension
-    local to_resize=()
-    shopt -s nullglob
-    local images=( $(cd $pg_face_dir/faces/$pg_face_theme; echo */*.gif) )
-    if [ ! -d "$pg_face_dir/faces/$pg_face_theme$pg_face_size" ]; then
-        cp -R "$pg_face_dir/faces/$pg_face_theme" "$pg_face_dir/faces/$pg_face_theme$pg_face_size"
-        to_resize=("${images[@]}")
-    else
-        for image in "${images[@]}"; do
-            if [ ! -f "$pg_face_dir/faces/$pg_face_theme$pg_face_size/$image" ]; then
-                cp "$pg_face_dir/faces/$pg_face_theme/$image" "$pg_face_dir/faces/$pg_face_theme$pg_face_size/$image"
-                to_resize+=("$image")
-            fi
-        done
-    fi
-    local nb_to_resize="${#to_resize[@]}"
-    if [ $nb_to_resize -gt 0 ]; then
+    mkdir -p  "$pg_face_dir/faces/$pg_face_theme$pg_face_size"
+    # copy new/updated images that are not resized yet and count
+    local nb_updated=$(cp --archive --update --verbose plugins/jarvis-face/faces/fluorescent/* plugins/jarvis-face/faces/fluorescent800x480/ | wc -l)
+    if [ "$nb_updated" -gt 0 ]; then
         jv_debug "Resizing $pg_face_theme/ into $pg_face_theme$pg_face_size/..."
+    
+        shopt -s nullglob
+        local images=( $(cd $pg_face_dir/faces/$pg_face_theme; echo */*.gif) )
+        local nb_images="${#images[@]}"
         local i=0
-        jv_progressbar $i $nb_to_resize
-        for image in "${to_resize[@]}"; do
+        jv_progressbar $i $nb_images
+        for image in "${nb_images[@]}"; do
             gifsicle --batch \
                      --resize $pg_face_size \
                      --no-warnings \
@@ -30,7 +22,8 @@ pg_face_init () {
                 jv_exit 1
             }
             let i+=1
-            jv_progressbar $i $nb_to_resize
+            jv_progressbar $i $nb_images
+            echo # newline
         done
     fi
     $pg_face_hide_cursor && unclutter -display $pg_face_display_num -root -idle 0.1 & # hide cursor if not used for 0.1 secs
